@@ -16,7 +16,10 @@ const createUser = async ({ displayName, email, password, image }) => {
 
 const findAllUsers = async () => User.findAll();
 
+const findUsersByPk = async (params) => User.findByPk(params);
+
 module.exports = {
     createUser,
     findAllUsers,
+    findUsersByPk,
 };

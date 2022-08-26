@@ -9,4 +9,6 @@ userRoute.post('/', userValidate, userControllers.createUser);
 
 userRoute.get('/', tokenValidation, userControllers.findAllUsers);
 
+userRoute.get('/:id', tokenValidation, userControllers.findUsersByPk);
+
 module.exports = userRoute;
