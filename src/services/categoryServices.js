@@ -2,4 +2,6 @@ const { Category } = require('../database/models');
 
 const createCategories = async (name) => Category.create({ name });
 
-module.exports = { createCategories };
+const findAllCategories = async () => Category.findAll();
+
+module.exports = { createCategories, findAllCategories };

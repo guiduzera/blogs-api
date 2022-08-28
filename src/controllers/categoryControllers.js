@@ -12,4 +12,14 @@ const createCategories = async (req, res) => {
     }
 };
 
-module.exports = { createCategories };
+const findAllCategories = async (req, res) => {
+    try {
+        const result = await categoryServices.findAllCategories();
+        return res.status(200).json(result);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: error.message });
+    }
+};
+
+module.exports = { createCategories, findAllCategories };
