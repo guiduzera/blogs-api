@@ -1,4 +1,3 @@
-const { date } = require('joi');
 const { BlogPost, Category, PostCategory, User } = require('../database/models');
 
 const createInPostCategories = async (Pid, Cids) => {
