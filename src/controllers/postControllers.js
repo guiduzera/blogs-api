@@ -22,4 +22,15 @@ const findAllInfosPost = async (req, res) => {
     }
 };
 
-module.exports = { createNewPost, findAllInfosPost };
+const findOneInfosPost = async (req, res) => {
+    try {
+        const result = await postServices.findOneInfosPost(req.params.id);
+        if (!result) return res.status(404).json({ message: 'Post does not exist' });
+        return res.status(200).json(result);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+module.exports = { createNewPost, findAllInfosPost, findOneInfosPost };

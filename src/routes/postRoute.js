@@ -9,4 +9,6 @@ postRoute.post('/', tokenValidation, verifyBodyMidlleware, postControllers.creat
 
 postRoute.get('/', tokenValidation, postControllers.findAllInfosPost);
 
+postRoute.get('/:id', tokenValidation, postControllers.findOneInfosPost);
+
 module.exports = postRoute;
