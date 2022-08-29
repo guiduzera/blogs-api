@@ -11,4 +11,6 @@ userRoute.get('/', tokenValidation, userControllers.findAllUsers);
 
 userRoute.get('/:id', tokenValidation, userControllers.findUsersByPk);
 
+userRoute.delete('/me', tokenValidation, userControllers.deleteUser);
+
 module.exports = userRoute;

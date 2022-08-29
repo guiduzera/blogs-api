@@ -18,8 +18,11 @@ const findAllUsers = async () => User.findAll();
 
 const findUsersByPk = async (params) => User.findByPk(params);
 
+const deleteUser = async (id) => User.destroy({ where: { id } });
+
 module.exports = {
     createUser,
     findAllUsers,
     findUsersByPk,
+    deleteUser,
 };

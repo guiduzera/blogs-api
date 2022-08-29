@@ -57,4 +57,14 @@ const findUsersByPk = async (req, res) => {
     }
 };
 
-module.exports = { createUser, findAllUsers, findUsersByPk };
+const deleteUser = async (req, res) => {
+    try {
+        await userServices.deleteUser(req.id);
+        return res.status(204).json();
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: ERROR });
+    }
+};
+
+module.exports = { createUser, findAllUsers, findUsersByPk, deleteUser };
