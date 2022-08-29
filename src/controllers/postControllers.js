@@ -45,4 +45,16 @@ const updatePost = async (req, res) => {
     }
 };
 
-module.exports = { createNewPost, findAllInfosPost, findOneInfosPost, updatePost };
+const deletePost = async (req, res) => {
+    try {
+       const result = await postServices.deletePost(req.params, req.id);
+       if (result === false) return res.status(204).json();
+       const { message, code } = result;
+       return res.status(code).json({ message });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: error.message });
+    }
+};
+
+module.exports = { createNewPost, findAllInfosPost, findOneInfosPost, updatePost, deletePost };
