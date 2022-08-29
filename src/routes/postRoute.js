@@ -10,6 +10,8 @@ postRoute.post('/', tokenValidation, verifyBodyMidlleware, postControllers.creat
 
 postRoute.get('/', tokenValidation, postControllers.findAllInfosPost);
 
+postRoute.get('/search', tokenValidation, postControllers.findByQuery);
+
 postRoute.get('/:id', tokenValidation, postControllers.findOneInfosPost);
 
 postRoute.put('/:id', tokenValidation, updatePostValidate, postControllers.updatePost);

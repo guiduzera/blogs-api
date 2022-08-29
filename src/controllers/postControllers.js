@@ -57,4 +57,27 @@ const deletePost = async (req, res) => {
     }
 };
 
-module.exports = { createNewPost, findAllInfosPost, findOneInfosPost, updatePost, deletePost };
+const findByQuery = async (req, res) => {
+    try {
+        const { q } = req.query;
+        if (!q) {
+            const all = await postServices.findAllInfosPost();
+            return res.status(200).json(all);
+        }
+        const result = await postServices.findByQuery(q);
+        if (!result) return res.status(200).json([]);
+        return res.status(200).json(result);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: error.message });
+    }
+};
+
+module.exports = { 
+    createNewPost,
+    findAllInfosPost,
+    findOneInfosPost,
+    updatePost,
+    deletePost,
+    findByQuery,
+};
