@@ -33,10 +33,22 @@ const findPostByPk = async (pk) => {
     return result.dataValues;
 };
 
-module.exports = { createNewPost, findPostByPk };
+const findAllInfosPost = async () => {
+    const allInfosPost = await BlogPost.findAll({
+        include: [{
+            model: User,
+            as: 'user',
+            attributes: {
+              exclude: ['password'],
+            },
+          }, {
+            model: Category,
+            as: 'categories',
+            through: { attributes: [] },
+        },
+        ],
+      });
+    return allInfosPost;
+};
 
-// const a = {
-//     title: 'Latest updates, August 1st',
-//     content: 'The whole text for the blog post goes here in this key',
-//     categoryIds: [1, 2],
-// };
+module.exports = { createNewPost, findPostByPk, findAllInfosPost };

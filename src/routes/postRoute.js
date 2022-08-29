@@ -7,4 +7,6 @@ const postRoute = express.Router();
 
 postRoute.post('/', tokenValidation, verifyBodyMidlleware, postControllers.createNewPost);
 
+postRoute.get('/', tokenValidation, postControllers.findAllInfosPost);
+
 module.exports = postRoute;

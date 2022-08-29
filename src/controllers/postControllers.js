@@ -12,4 +12,14 @@ const createNewPost = async (req, res) => {
     }
 };
 
-module.exports = { createNewPost };
+const findAllInfosPost = async (req, res) => {
+    try {
+        const result = await postServices.findAllInfosPost();
+        res.status(200).json(result);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: error.message });
+    }
+};
+
+module.exports = { createNewPost, findAllInfosPost };
