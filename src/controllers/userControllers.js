@@ -16,10 +16,10 @@ const adapting = (array) => {
 const createUser = async (req, res) => {
     try {
         const result = await userServices.createUser(req.body);
-        if (!result) {
+        if (!result[0]) {
             return res.status(409).json({ message: 'User already registered' });  
         }
-        const token = tokenCreator(req.body.displayName);
+        const token = tokenCreator(result[1]);
         return res.status(201).json({ token });
     } catch (error) {
         console.log(error);

@@ -2,7 +2,7 @@ const postServices = require('../services/postServices');
 
 const createNewPost = async (req, res) => {
     try {
-        const result = await postServices.createNewPost(req.body, req.displayName);
+        const result = await postServices.createNewPost(req.body, req.id);
         if (!result[0]) return res.status(400).json({ message: '"categoryIds" not found' });
         const findPost = await postServices.findPostByPk(result[1]);
         res.status(201).json(findPost);
@@ -33,4 +33,16 @@ const findOneInfosPost = async (req, res) => {
     }
 };
 
-module.exports = { createNewPost, findAllInfosPost, findOneInfosPost };
+const updatePost = async (req, res) => {
+    try {
+        const result = await postServices.updatePost(req.body, req.params, req.id);
+        if (!result) return res.status(401).json({ message: 'Unauthorized user' });
+        const post = await postServices.findOneInfosPost(req.params.id);
+        return res.status(200).json(post);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: error.message });
+    }
+};
+
+module.exports = { createNewPost, findAllInfosPost, findOneInfosPost, updatePost };

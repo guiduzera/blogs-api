@@ -1,3 +1,4 @@
+const { date } = require('joi');
 const { BlogPost, Category, PostCategory, User } = require('../database/models');
 
 const createInPostCategories = async (Pid, Cids) => {
@@ -9,8 +10,8 @@ const createInPostCategories = async (Pid, Cids) => {
     return [true, Pid];
 };
 
-const createNewPost = async (body, displayName) => {
-    const user = await User.findOne({ where: { displayName } });
+const createNewPost = async (body, id) => {
+    const user = await User.findOne({ where: { id } });
     const createBlogPost = await BlogPost.create({
         title: body.title,
         content: body.content,
@@ -69,4 +70,17 @@ const findOneInfosPost = async (id) => {
     return OneInfoPost;
 };
 
-module.exports = { createNewPost, findPostByPk, findAllInfosPost, findOneInfosPost };
+const updatePost = async ({ title, content }, { id }, Uid) => {
+    const blogPost = await BlogPost.findByPk(id);
+    if (blogPost.dataValues.userId !== Uid) return false;
+    await BlogPost.update({ title, content, updated: new Date() }, { where: { id } });
+    return true;
+};
+
+module.exports = { 
+    createNewPost,
+    findPostByPk,
+    findAllInfosPost,
+    findOneInfosPost,
+    updatePost,
+};

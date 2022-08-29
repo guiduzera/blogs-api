@@ -10,7 +10,7 @@ const getAllUsers = async (req, res) => {
         if (result.dataValues.password !== req.body.password) {
             return res.status(400).json({ message: 'Invalid fields' });
         }
-        const token = tokenCreator(result.dataValues.displayName);
+        const token = tokenCreator(result.dataValues.id);
         return res.status(200).json({ token });
     } catch (e) {
         console.log(e);

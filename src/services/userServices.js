@@ -5,13 +5,13 @@ const createUser = async ({ displayName, email, password, image }) => {
     if (emailExists) {
         return false;
     }
-    await User.create({
+    const create = await User.create({
         displayName,
         email,
         password,
         image,
     });
-    return true;
+    return [true, create.dataValues.id];
 };
 
 const findAllUsers = async () => User.findAll();
